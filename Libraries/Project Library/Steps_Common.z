@@ -1,0 +1,9 @@
+﻿class ClickEnter : Step
+	%StepInfo[Desc="Provide Sleep And Click Enter.",Group="Common"]
+	Main()
+		//Provide Sleep And Click Enter.
+		Sleep(Delay_ExplicitShortWait)
+		UA.GenKeyEvents ("<Enter>")
+		Sleep (Delay_ExplicitShortWait)
+		
+

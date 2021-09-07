@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Types CRC="14D2D4BE">
+		<Enum Name="WebBrowserType" IsZee="true">
+			<Value Name="InternetExplorer" Label="Internet Explorer" Value="0"/>
+			<Value Name="Firefox" Label="Firefox" Value="1"/>
+			<Value Name="Chrome" Label="Chrome" Value="2"/>
+		</Enum>
+	</Types>
+	<Declare>
+		<Variables>
+			<Variable Name="BrowserType" Type="WebBrowserType"/>
+			<Variable Name="StartURL" Type="String"/>
+			<Variable Name="ReportLocation" Label="ReportLocation" Type="String"/>
+		</Variables>
+	</Declare>
+	<Layout>
+		<Variables>
+			<Variable Name="BrowserType"/>
+			<Variable Name="StartURL"/>
+			<Variable Name="ReportLocation"/>
+		</Variables>
+	</Layout>
+	<Data>
+		<BrowserType>Chrome</BrowserType>
+		<ReportLocation>C:\AscentialReport</ReportLocation>
+		<StartURL>https://impl.workday.com/wday/authgwy/transre_preview/login.htmld?redirect=n</StartURL>
+	</Data>
+</Project>

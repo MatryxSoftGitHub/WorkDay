@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore>
+	<Object Name="Dt_AdHocBankPaymentEvent_TC001" Type="Record_AdHocBankPaymentEvent_TC001List" FileName="Dt_AdHocBankPaymentEvent_TC001.zData"/>
+	<Object Name="Dt_AdHocBankTransactionEvent_TC003" Type="Record_AdHocBankTransactionEventList_TC003" FileName="Dt_AdHocBankTransactionEvent_TC003.zData"/>
+	<Object Name="Dt_CreateBankAccountTransferforSettlement_TC002" Label="Create Bank Account Transfer for Settlement" Type="Record_CreateBankAccountTransferforSettlementList_TC002" FileName="Dt_CreateBankAccountTransferforSettlement_TC002.zData"/>
+</DataStore>

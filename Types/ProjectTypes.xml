@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Types CRC="8F97586A">
+	<Enum Name="WebBrowserType" IsZee="true">
+		<Value Name="InternetExplorer" Label="Internet Explorer" Value="0"/>
+		<Value Name="Firefox" Label="Firefox" Value="1"/>
+		<Value Name="Chrome" Label="Chrome" Value="2"/>
+	</Enum>
+	<List Name="ListOfString" ItemType="String" Optional="true"/>
+	<List Name="ListOfInteger" ItemType="Integer" Optional="true"/>
+	<Record Name="ReportSteps">
+		<Field Name="StepNumber" Type="String"/>
+		<Field Name="ActionsPerformed" Type="String"/>
+		<Field Name="ExpectedResult" Type="String"/>
+		<Field Name="StepStatus" Type="String"/>
+		<Field Name="ActualResults" Type="String"/>
+		<Field Name="DeskTopScreenShot" Type="String"/>
+		<Field Name="DiffImage" Type="String"/>
+		<Field Name="ActualImage" Type="String"/>
+		<Field Name="BaselineImage" Type="String"/>
+		<Field Name="ExecutedTime" Type="String"/>
+	</Record>
+	<RestrictedString Name="Rbtn_TransactionType">
+		<Values>
+			<Value>Deposit</Value>
+			<Value>Withdrawal</Value>
+		</Values>
+	</RestrictedString>
+	<Record Name="Record_AdHocBankTransactionEvent_TC003">
+		<Field Name="TestcaseID" Type="String" Unique="true"/>
+		<Field Name="sInputStartProxy" Type="String"/>
+		<Field Name="sSearchEvent" Type="String"/>
+		<Field Name="sMemo" Type="String"/>
+		<Field Name="sCompany" Type="String"/>
+		<Field Name="sBankAcc" Type="String"/>
+		<Field Name="sCurrency" Type="String"/>
+		<Field Name="sTransactionType" Type="Rbtn_TransactionType"/>
+		<Field Name="sAmount" Type="String"/>
+		<Field Name="sReferenceName" Type="String"/>
+		<Field Name="sJournalSource" Type="String"/>
+		<Field Name="sRevenue" Type="String"/>
+		<Field Name="sLinesMemo" Type="String"/>
+		<Field Name="sLineCostCenter" Type="String"/>
+	</Record>
+	<List Name="Record_AdHocBankTransactionEventList_TC003" ItemType="Record_AdHocBankTransactionEvent_TC003"/>
+	<Record Name="Record_CreateBankAccountTransferforSettlement_TC002">
+		<Field Name="RowId" Type="String"/>
+		<Field Name="sDtEventName" Type="String"/>
+		<Field Name="sProxyAs" Type="String"/>
+		<Field Name="sTransferDate" Type="String"/>
+		<Field Name="sCurrencyName" Type="String"/>
+		<Field Name="sAmount" Type="String"/>
+		<Field Name="sPaymentType" Type="String"/>
+		<Field Name="sInitiatingCompany" Type="String"/>
+		<Field Name="sInitiatingAccount" Type="String"/>
+		<Field Name="sChkboxEliminateForeignExchangeGainOrLossCheckbox" Type="String"/>
+		<Field Name="sMemo" Type="String"/>
+		<Field Name="sToAccountName" Type="String"/>
+		<Field Name="sBankAccountTransferApprover1" Type="String"/>
+		<Field Name="sFileName" Type="String"/>
+	</Record>
+	<List Name="Record_CreateBankAccountTransferforSettlementList_TC002" ItemType="Record_CreateBankAccountTransferforSettlement_TC002"/>
+	<Record Name="Record_AdHocBankPaymentEvent_TC001">
+		<Field Name="TestcaseID" Type="String" Unique="true"/>
+		<Field Name="sActAs" Type="String"/>
+		<Field Name="sSearchEvent" Type="String"/>
+		<Field Name="sCompany" Type="String"/>
+		<Field Name="sBankAccount" Type="String"/>
+		<Field Name="sPayee" Type="String"/>
+		<Field Name="sCurrencyName" Type="String"/>
+		<Field Name="sPaymentType" Type="String"/>
+		<Field Name="sControlTotalAmount" Type="String"/>
+		<Field Name="sMemo" Type="String"/>
+		<Field Name="sCompany_LinesTab" Type="String"/>
+		<Field Name="sSpendCategory" Type="String"/>
+		<Field Name="sQuantity" Type="String"/>
+		<Field Name="sUnitCost" Type="String"/>
+		<Field Name="sCostCenter" Type="String"/>
+		<Field Name="sSourceFile" Type="String"/>
+	</Record>
+	<List Name="Record_AdHocBankPaymentEvent_TC001List" ItemType="Record_AdHocBankPaymentEvent_TC001"/>
+</Types>

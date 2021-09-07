@@ -1,0 +1,29 @@
+﻿class Web_WorkdayPageAppState : Test
+	%TestInfo[Desc="OnStart and OnFinish for Workday Application."]
+	OnStart()
+		// Use Project/Data... to change the BrowserType
+		// Launch the Browser and Navigate to the Workday application
+		Boolean bIsProcessRunning= true
+		WebBrowserType WebBrowserType = DataStore.Query ("BrowserType")
+		IsProcessRunning ("{WebBrowserType}.exe", bIsProcessRunning)
+		if bIsProcessRunning==true
+			KillProcess ("{WebBrowserType}.exe")
+		Web.SetBrowser (WebBrowserType)
+		UA.SetOption ("PageLoadTimeout", Delay_Window)
+		if Web_WorkdayPage.WaitUntilExists (Delay_ExplicitLongWait)
+			return
+		Web.SetBaseState (DataStore.Query("StartURL"))
+		if Web_WorkdayPage.WaitUntilExists (Delay_Window)
+			Print ("Workday login page is displayed successfully.")
+		else
+			throw Exception ("Failed to display Workday login page.")
+		
+	OnFinish()
+		// Close the web browser.
+		WebBrowserType WebBrowserType = DataStore.Query ("BrowserType")
+		Boolean bIsProcessRunning= true
+		IsProcessRunning ("{WebBrowserType}.exe", bIsProcessRunning)
+		if bIsProcessRunning==true
+			KillProcess ("{WebBrowserType}.exe")
+		
+

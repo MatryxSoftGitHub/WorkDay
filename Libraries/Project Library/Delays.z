@@ -1,0 +1,12 @@
+﻿//Incase of any slow machine, this factor is to be updated
+Integer iDelayFactor = 1 
+//Max time for which to wait for a window to come up
+Integer Delay_Window = 120 * iDelayFactor
+//max wait until which to wait for a UI object to appear
+Integer Delay_Control = 30 * iDelayFactor
+//Max wait for which to wait for a process to start or stop
+Integer Delay_ProcessOrService = 60 * iDelayFactor
+//In case of any wait for scenarios like a list to populate etc, instead of harcoding dif values of sleep in file
+Integer Delay_ExplicitShortWait = 3 * iDelayFactor
+Integer Delay_ExplicitLongWait = 10 * iDelayFactor
+

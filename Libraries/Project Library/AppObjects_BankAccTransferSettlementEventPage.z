@@ -1,0 +1,45 @@
+﻿app WebPage CreateBankAccountTransferFor
+	path [@Title=="Create Bank Account Transfer for Settlement - Workday"]
+	WebTextField Txt_Currency
+		path [@Label=="Currency"]
+	WebTextField Txt_Amount
+		path [@Label=="Amount"]
+	WebTextField Txt_PaymentType
+		path [@Label=="Payment Type"]
+	WebTextField Txt_InitiatingCompany
+		path [@Label=="Initiating Company"]
+	WebTextField Txt_InitiatingAccount
+		path [@Label=="Initiating Account"]
+	WebCheckBox Chk_EliminateForeignExchangeGainOr
+		path [@Label=="Eliminate Foreign Exchange Gain or Loss"]
+	WebTextField Txt_Memo
+		path [@Label=="Memo"]
+	WebTextField Txt_ToCompany
+		path [@Label=="Company"]
+	WebPushButton Btn_SelectFiles
+		path [@Text=="Select files"]
+	WebTextField Txt_Date
+		path [@Label=="Date"]
+	WebPushButton Btn_Submit
+		path [@Text=="Submit"]
+	WebPushButton Btn_Cancel
+		path [@Text=="Cancel"]
+	WebTextField Txt_Account
+		path [@Label=="Account"]
+	WebText Txt_Error
+		path [@ElemId=="errorWidgetMessageCount"]
+	WebPushButton Btn_Close
+		path WebPushButton [@ElemClass=="css-1zzzoj-XIconContainer esz1u7w4"]
+	WebElem Dlg_ErrorInfo
+		path WebBlock[@ElemClass=="WMT wd-popup WNEW WCEW"]
+		WebElem Btn_CloseDlg
+			path WebBlock[@ElemClass=="WMU WDT"]
+	WebElem Dlg_Discard
+		path WebBlock[@ElemClass=="WMT wd-popup WNEW WCEW WMEW"]
+		WebPushButton Btn_Discard
+			path [@Text=="Discard"]
+	WebElem Img_SucessImage
+		path WebBlock[@ElemClass=="WIAL WHAL wd-icon-check"]
+	WebTextField Txt_SearchField
+		path [@ElemClass=="css-ldfn33-InputElement esz1u7w0"]
+	

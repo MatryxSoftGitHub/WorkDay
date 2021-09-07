@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore>
+	<Types CRC="8F97586A">
+		<Record Name="Record_CreateBankAccountTransferforSettlement_TC002">
+			<Field Name="RowId" Type="String"/>
+			<Field Name="sDtEventName" Type="String"/>
+			<Field Name="sProxyAs" Type="String"/>
+			<Field Name="sTransferDate" Type="String"/>
+			<Field Name="sCurrencyName" Type="String"/>
+			<Field Name="sAmount" Type="String"/>
+			<Field Name="sPaymentType" Type="String"/>
+			<Field Name="sInitiatingCompany" Type="String"/>
+			<Field Name="sInitiatingAccount" Type="String"/>
+			<Field Name="sChkboxEliminateForeignExchangeGainOrLossCheckbox" Type="String"/>
+			<Field Name="sMemo" Type="String"/>
+			<Field Name="sToAccountName" Type="String"/>
+			<Field Name="sBankAccountTransferApprover1" Type="String"/>
+			<Field Name="sFileName" Type="String"/>
+		</Record>
+		<List Name="Record_CreateBankAccountTransferforSettlementList_TC002" ItemType="Record_CreateBankAccountTransferforSettlement_TC002"/>
+	</Types>
+	<Objects>
+		<Object Name="Dt_CreateBankAccountTransferforSettlement_TC002" Label="Create Bank Account Transfer for Settlement" Type="Record_CreateBankAccountTransferforSettlementList_TC002" Group="CashManagement">
+			<Record_CreateBankAccountTransferforSettlement_TC002>
+				<RowId>Data_Row_1</RowId>
+				<sDtEventName>Create Bank Account Transfer for Settlement</sDtEventName>
+				<sProxyAs>Iris Huang</sProxyAs>
+				<sTransferDate>01-09-2021</sTransferDate>
+				<sCurrencyName>USD</sCurrencyName>
+				<sAmount>100</sAmount>
+				<sPaymentType>Wire</sPaymentType>
+				<sInitiatingCompany>NYT USD  - New York Home Office</sInitiatingCompany>
+				<sInitiatingAccount>NYT ACH Tax - JPMC USD-3465</sInitiatingAccount>
+				<sChkboxEliminateForeignExchangeGainOrLossCheckbox>No</sChkboxEliminateForeignExchangeGainOrLossCheckbox>
+				<sMemo>Test1 Pass</sMemo>
+				<sToAccountName>NYT Bermuda - JPMC USD-2175</sToAccountName>
+				<sBankAccountTransferApprover1>James Ready</sBankAccountTransferApprover1>
+				<sFileName>TestFile.txt</sFileName>
+			</Record_CreateBankAccountTransferforSettlement_TC002>
+		</Object>
+	</Objects>
+	<Layout>
+		<Object Name="Dt_CreateBankAccountTransferforSettlement_TC002"/>
+	</Layout>
+</DataStore>

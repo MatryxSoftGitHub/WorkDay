@@ -1,0 +1,14 @@
+﻿app WebPage Web_CreateAdHocPay_ErrorDlg
+	path [@Title=="Create Ad Hoc Payment - Workday"]
+	WebElem WebElem_AdHocPayErrorDlg
+		path WebBlock[@ElemClass=="WMT wd-popup WNEW WCEW"]
+		WebList WebList_Errors
+			path [@ElemClass=="WHEI"]
+			class ErrorMsgs
+				path Item [@Index>0]
+				WebText Txt_FieldName
+					path [@ElemClass=="gwt-Label WMNR WNNR"]
+				WebText Txt_ErroeMsg
+					path [@ElemClass=="gwt-Label WAOR"]
+		WebElem WebBlock
+			path WebBlock[@ElemClass=="WMU WDT"]

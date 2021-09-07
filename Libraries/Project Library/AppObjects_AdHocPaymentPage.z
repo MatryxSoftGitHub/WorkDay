@@ -1,0 +1,141 @@
+﻿app WebPage Web_CreateAdHocPaymentPage
+	path [@Title=="Create Ad Hoc Payment - Workday" , !contains<WebElem_ErrorDlg>]
+	WebElem WebBlem_CreateAdHocPayment
+		path WebBlock[@ElemId=="mainContent"]
+		WebTextField Txt_Company
+			path [@Label=="Company"]
+		WebTextField Txt_BankAccount
+			path [@Label=="Bank Account"]
+		WebRadioGroup Rbn_Payee
+			path [@Name=="ViewModel_81", @Instance==1]
+		WebTextField Txt_Payee
+			path [@ElemId=="selectInputId-56$85472"]
+		WebTextField Txt_CurrencyName
+			path [@Label=="Currency"]
+		WebCheckBox Chk_GainOrLoss
+			path [@Label=="Eliminate Foreign Exchange Gain or Loss"]
+		WebElem DefaultTaxOptions
+			path WebBlock[@ElemId=="56$217058-input--uid17-input"]
+			WebElem Icon_DefaultTaxOptions
+				path WebBlock[@ElemClass=="WIAL WHAL"]
+		WebTextField Txt_DefaultTaxCode
+			path [right of WebLabel[@Text=="Default Tax Code"]]
+		WebTextField Txt_PaymentType
+			path [right of WebLabel[@Text=="Payment Type"]]
+		WebTextField Txt_ShipToAddress
+			path [right of WebLabel[@Text=="Ship-To Address"]]
+		WebTextField Txt_HandlingCode
+			path [right of WebLabel[@Text=="Handling Code"]]
+		WebTextField Txt_ControlTotalAmount
+			path [right of WebLabel[@Text=="Control Total Amount"]]
+		WebTextField Txt_FreightAmount
+			path [right of WebLabel[@Text=="Freight Amount"]]
+		WebTextField Txt_OtherCharges
+			path [@Label=="Other Charges"]
+		WebTextField Txt_Memo
+			path [right of WebLabel[@Text=="Memo"]]
+		WebTextField Txt_Addenda
+			path [right of WebLabel[@Text=="Addenda"]]
+		WebTextField Txt_ExternalReference
+			path [right of WebLabel[@Text=="External Reference"]]
+		WebElem WebElem_TaxAuthorityFormType
+			path WebBlock[@ElemId=="56$263094-input--uid36-input"]
+			WebElem Icon_TaxAuthorityForm
+				path WebBlock[@ElemClass=="WIAL WHAL"]
+		WebTextField Txt_TINType
+			path [@Label=="TIN Type"]
+		WebTextField Txt_TaxID
+			path [@Label=="Tax ID"]
+		WebCheckBox WebChk_TaxPayment
+			path [@Label=="Tax Payment"]
+		WebElem WebElem_LinesTable
+			path WebBlock[@ElemClass=="WIUG"]
+			WebTable Header
+				path [@ElemClass=="WDVG"]
+				WebPushButton AddRow
+					path [@ElemClass=="WG1M WH1M"]
+				WebText Company
+					path [@Text=="Company"]
+				WebText Item
+					path [@Text=="Item"]
+				WebText ItemDescription
+					path [@Text=="Item Description"]
+				WebText SpendCategory
+					path [@Text=="Spend Category"]
+				WebText Tax
+					path [@Text=="Tax"]
+				WebText TaxRecoverability
+					path [@Text=="Tax Recoverability"]
+				WebText Quantity
+					path [@Text=="Quantity"]
+				WebText UnitCost
+					path [@Text=="Unit Cost"]
+				WebText ExtendedAmount
+					path [@Text=="Extended Amount"]
+				WebText Memo
+					path [@Text=="Memo"]
+				WebText CostCenter
+					path [@Text=="*Cost Center"]
+			class Lines
+				path Row [@ElemClass like "*",@RowIndex>1]
+				WebTextField Company
+					path [@ElemId=="selectInputId-56$72651"]
+				WebTextField Item
+					path [@ElemId=="selectInputId-56$12188"]
+				WebElem ItemDescription
+					path [@ElemClass=="gwt-TextBox WPK2"]
+					path WebBlock[@ElemId=="56$611842"]
+				WebTextField SpendCategory
+					path [@ElemId=="selectInputId-56$12189"]
+				WebTextField Quantity
+					path [@ElemId=="56$12190-input"]
+				WebElem UnitCost_Old
+					path [@ElemId like "56$12192*"]
+				WebTextField UnitCost
+					path [@ElemId=="56$12192-input"]
+				WebTextField CostCenter
+					path [@ElemId=="selectInputId-56$314026"]
+		WebText Txt_ErrorMsg
+			path [@ElemId=="errorWidgetMessageCount"]
+		WebList Lines_Tabs
+			path [@ElemClass=="WNY1"]
+			WebText Txt_Attachments
+				path [@Text=="Attachments"]
+			WebText Txt_Lines
+				path [@Text=="Lines"]
+		WebElem WebElem_Attachement
+			path WebBlock[@ElemId=="wd-FileUploadAwesome-6$24355"]
+			WebPushButton Btn_SelectFiles
+				path [@Text=="Select files"]
+			WebPushButton Btn_Upload
+				path [@Text=="Upload"]
+		WebPushButton Btn_Submit
+			path [@Text=="Submit"]
+		WebPushButton Btn_Cancel
+			path [@Text=="Cancel"]
+	WebList List_DefaultTaxOptions
+		path [@ElemClass=="WNJR WCKR WDMR"]
+		class Items_DefaultTaxOptions : AppObject
+			path Item [@Index>1]
+			WebText Items
+				path [@ElemClass=="gwt-Label WHCP WABP"]
+	WebElem WebBlock_Search
+		path WebBlock[@ElemId=="wd-searchInput"]
+		WebElem WebElem_SearchIcon
+			path WebBlock[@ElemClass=="css-1yrjd5m-SearchIconContainer esz1u7w3"]
+		WebTextField Txt_Search
+			disabled path [@ElemClass=="css-ldfn33-InputElement esz1u7w0"]
+			path [@Type=="search"]
+		WebPushButton Btn_SearchClose
+			path [@ElemClass=="css-1zzzoj-XIconContainer esz1u7w4"]
+	WebElem WebElem_ErrorDlg
+		path WebBlock[@ElemClass=="WMT wd-popup WNEW WCEW"]
+	WebElem Elem_Currency
+		path WebBlock[@ElemClass=="ReactVirtualized__Grid__innerScrollContainer"]
+		class Items_Currency : AppObject
+			path [@Text like "*"]
+	WebElem Elem_DisCardDlg
+		path WebBlock[@ElemClass=="WMT wd-popup WNEW WCEW WMEW"]
+		WebPushButton Btn_Discard
+			path [@Text=="Discard"]
+

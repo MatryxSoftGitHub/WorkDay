@@ -1,0 +1,159 @@
+﻿Integer iErrorCount=0
+ReportSteps reportingSteps
+Integer reportstepCounter=0
+WriteStep(String StepsPerformed, String ExpectedOutput)
+	%FuncInfo[Desc="Writing steps performed and expected results in the logs",Group="Reporters"]
+	// delete all content in the steps
+	if(reportingSteps.StepNumber !="")
+		reportstepCounter++
+	
+	reportingSteps.StepNumber = [String]reportstepCounter
+	reportingSteps.ActionsPerformed = ""
+	reportingSteps.ActualImage = ""
+	reportingSteps.ActualResults = ""
+	reportingSteps.BaselineImage = ""
+	reportingSteps.DeskTopScreenShot = ""
+	reportingSteps.DiffImage = ""
+	reportingSteps.ExecutedTime = ""
+	reportingSteps.ExpectedResult = ""
+	reportingSteps.StepStatus = ""
+	
+	// Write Steps performed and expected results in step
+	reportingSteps.ActionsPerformed = StepsPerformed
+	reportingSteps.ExpectedResult = ExpectedOutput
+	
+	Print ("StepsPerformed - " + StepsPerformed)
+	Print ("ExpectedOutput - " + ExpectedOutput)
+	
+	String FolderPath
+	FolderPath = DataStore.Query ("ReportLocation") + "\Report.Txt"
+	TextFile MyFile
+	MyFile.Open (FolderPath, FileMode.Append, FileEncoding.UTF16)
+	MyFile.Write ("-----------------------------------------------------------------------------------------------------------------")
+	MyFile.Write ([String]DateTime.Now() +" --> Steps Performed - " + StepsPerformed)
+	MyFile.Write ([String]DateTime.Now() + " --> Expected Output - " + ExpectedOutput)
+	MyFile.Close ()
+	
+VerifyOutput(Object ExpectedOutput, Object ActualOutput, String SuccessMessage, String FailureMessage, Boolean bNotcontinue = true)
+	%FuncInfo[Desc="Verify the results and logs accordingly",Group="Reporters"]
+	String newLineChar
+	newLineChar = Char (10)// ascii value of new line character
+	// 
+	String FolderPath
+	FolderPath = DataStore.Query ("ReportLocation") + "\Report.Txt"
+	TextFile MyFile
+	MyFile.Open (FolderPath, FileMode.Append, FileEncoding.UTF16)
+	
+	reportingSteps.ExecutedTime = [String]DateTime.Now()
+	// Success Block
+	if ExpectedOutput == ActualOutput
+		if !(SuccessMessage.IsNullOrEmpty())
+			Print ("SuccessMessage - " + SuccessMessage)
+			MyFile.Write ([String]DateTime.Now() +" --> Pass - " + SuccessMessage)
+			MyFile.Close ()
+			reportingSteps.StepStatus = "Pass"
+			if(reportingSteps.ActualResults != "")
+				reportingSteps.ActualResults = reportingSteps.ActualResults +  newLineChar + SuccessMessage
+			else
+				reportingSteps.ActualResults = SuccessMessage
+	// Failure Block
+	else
+		MyFile.Write ([String]DateTime.Now() +" -->Fail - " + FailureMessage)
+		MyFile.Close ()
+		Time time = Time.Now()
+		// Take desktop screen shot
+		String failureDesktopScreen = "Failed_" + [String]time.GetHour() + "_" + [String]time.GetMinute() + "_" + [String]time.GetSecond()+ ".png"
+		UA.CaptureImage (failureDesktopScreen)
+		reportingSteps.DeskTopScreenShot = failureDesktopScreen
+		reportingSteps.StepStatus = "Fail"
+		if(reportingSteps.ActualResults != "")
+			reportingSteps.ActualResults = reportingSteps.ActualResults +  newLineChar + FailureMessage
+		else
+			reportingSteps.ActualResults = FailureMessage
+		LogError ("Error")
+		if bNotcontinue
+			LogData(reportingSteps)
+			throw Exception (FailureMessage)
+	LogData(reportingSteps)
+	
+VerifyImageOutput(AppObject o_Window, String s_ImageFileName, String? s_MaskFileName = "", String s_PassMessage = null, String s_FailMessage = null, Integer i_PixelTolerance = null, Integer i_ColorTolerance = null, out Integer imageErrorCount = 1)
+	%FuncInfo[Desc="Performs verify image advanced and write logs to custom report. If pass message string is sent, function will write to custom logs else return error count",Group="Reporters"]
+	// compare image and retuen the error count
+	o_Window.VerifyImageAdvanced (s_ImageFileName, s_MaskFileName, i_PixelTolerance, i_ColorTolerance)
+	// Time time = Time.Now()
+	// String s_ImageLogName = s_ImageFileName.Substring (1, s_ImageFileName.IndexOf(".", 1) - 1) + [String]time.GetHour() + "_" + [String]time.GetMinute() + "_" + [String]time.GetSecond() + ".png"
+	reportingSteps.BaselineImage = s_ImageFileName
+	reportingSteps.ActualImage = UA.GetLastActualImage()
+	reportingSteps.DiffImage = UA.GetLastDiffImage()
+	imageErrorCount = GetErrorCount()
+	if s_PassMessage.IsNullOrEmpty()
+		return
+	
+	// If the image to be compared and output to be written to logs
+	Integer errorCoun = GetErrorCount()
+	VerifyOutput(0, errorCoun, s_PassMessage, s_FailMessage)
+	
+KillProcess(String sProcessName)
+	%FuncInfo[Desc="This function will kill system process.Do not add extension with the process name.",Group="Process"]
+	String sProcess = "Taskkill " + "/IM " + sProcessName +"*" + " /" + "F"
+	System.Execute (sProcess)
+Integer ListFind_PartialText(List<String> lsTargetList, String sSearchItem, Boolean bPartialString = null)
+	%FuncInfo[Group="ListFind"]
+	String sPartialText
+	if (bPartialString == null)
+			bPartialString = true
+	if bPartialString == false
+			return lsTargetList.Find(sSearchItem)
+	else                                                                                                                                                                                      
+		for (sPartialText in lsTargetList)                                                                                /* Compare list items with regular expression */
+			if (sPartialText.IsNull() == false && sPartialText like sSearchItem)
+					return lsTargetList.Find(sPartialText)
+	return 0
+	
+
+ReportFileCreate()
+	%FuncInfo[Group="Reporters"]
+	String FolderPath
+	FolderPath = DataStore.Query ("ReportLocation")
+	Print(FolderPath)
+	System.CreateDir (FolderPath)
+	String ReportPath
+	ReportPath = DataStore.Query ("ReportLocation") + "\Report.Txt"
+	TextFile MyFile
+	MyFile.Open (ReportPath, FileMode.Append, FileEncoding.UTF16)
+	MyFile.Write ("#######################################################")
+	MyFile.Write ("Testcase Name - Started at " + [String]DateTime.Now() )
+	MyFile.Write ("#######################################################")
+	MyFile.Close ()
+
+IsProcessRunning(String sProcessName, out Boolean bIsProcessRunning)
+	%FuncInfo[Desc="This method returns a boolean value if the given process is running",Group="Process"]
+	//Setting the boolena value to false
+	bIsProcessRunning=false
+	
+	//Get the list of processes running
+	List<String> sProcesses
+	System.Execute ("tasklist /FI ""IMAGENAME eq " + sProcessName, sProcesses)
+	Print(sProcesses)
+	if sProcesses.Count()>1
+		bIsProcessRunning = true
+	// for (String sitem in sProcesses)
+		// if sitem.ToLower ().Contains (sProcessName.ToLower())
+			// bIsProcessRunning = true
+			// break
+	Print("The Process:",sProcessName+" is running:",bIsProcessRunning)
+String GetWorkingDirectoryPath()
+	%FuncInfo[Desc="Gets the Current Working Directory Path",Group="DirectoryPath"]
+	List<String> lsOut
+	// System.Execute ("%CD%", lsOut)
+	// Print (lsOut)
+	// sWorkingDirectory = lsOut[1].GetField ("'", 2)
+	// sWorkingDirectory = sWorkingDirectory.GetField ("'", 1)
+	// Print (sWorkingDirectory)
+	// return sWorkingDirectory
+	
+	System.Execute ("CD", lsOut)
+	sWorkingDirectory = lsOut[1]
+	// Print (sWorkingDirectory)
+	return sWorkingDirectory
+	

@@ -1,0 +1,61 @@
+record ReportSteps
+	String StepNumber
+	String ActionsPerformed
+	String ExpectedResult
+	String StepStatus
+	String ActualResults
+	String DeskTopScreenShot
+	String DiffImage
+	String ActualImage
+	String BaselineImage
+	String ExecutedTime
+restricted String Rbtn_TransactionType
+	"Deposit"
+	"Withdrawal"
+record Record_AdHocBankTransactionEvent_TC003
+	String TestcaseID
+	String sInputStartProxy
+	String sSearchEvent
+	String sMemo
+	String sCompany
+	String sBankAcc
+	String sCurrency
+	Rbtn_TransactionType sTransactionType
+	String sAmount
+	String sReferenceName
+	String sJournalSource
+	String sRevenue
+	String sLinesMemo
+	String sLineCostCenter
+record Record_CreateBankAccountTransferforSettlement_TC002
+	String RowId
+	String sDtEventName
+	String sProxyAs
+	String sTransferDate
+	String sCurrencyName
+	String sAmount
+	String sPaymentType
+	String sInitiatingCompany
+	String sInitiatingAccount
+	String sChkboxEliminateForeignExchangeGainOrLossCheckbox
+	String sMemo
+	String sToAccountName
+	String sBankAccountTransferApprover1
+	String sFileName
+record Record_AdHocBankPaymentEvent_TC001
+	String TestcaseID
+	String sActAs
+	String sSearchEvent
+	String sCompany
+	String sBankAccount
+	String sPayee
+	String sCurrencyName
+	String sPaymentType
+	String sControlTotalAmount
+	String sMemo
+	String sCompany_LinesTab
+	String sSpendCategory
+	String sQuantity
+	String sUnitCost
+	String sCostCenter
+	String sSourceFile

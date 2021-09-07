@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<State>
+	<GroupList SelectedGroup="Tests">
+		<Group Name="App Objects" GroupOrientation="Vert" SecondaryGroup="">
+			<Workspace>
+				<Panels>
+					<Panel Name="Actions Explorer" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="Compile Errors" Size="0" Collapsed="true" LastLocation="DockBottom"/>
+					<Panel Name="App Objects" Size="0" Collapsed="false" LastLocation="DockRight"/>
+					<Panel Name="App Object Editor" Size="0" Collapsed="true" LastLocation="DockBottom"/>
+					<Panel Name="App Metadata Editor" Size="0" Collapsed="false" LastLocation="DockBottom"/>
+				</Panels>
+				<Sections>
+					<Section Location="DockLeft" Size="247" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockRight" Size="240" Collapsed="false">
+						<Panels>
+							<Panel Name="App Objects"/>
+						</Panels>
+					</Section>
+					<Section Location="DockBottom" Size="161" Collapsed="false">
+						<Panels>
+							<Panel Name="App Object Editor"/>
+							<Panel Name="App Metadata Editor"/>
+							<Panel Name="Compile Errors"/>
+						</Panels>
+					</Section>
+				</Sections>
+			</Workspace>
+		</Group>
+		<Group Name="Tests" GroupOrientation="Vert" SecondaryGroup="App Objects">
+			<TabList>
+				<Tab TabKind="Step" Name="Libraries\Project Library\Steps.z:Attachments"/>
+				<Tab TabKind="Test" Name="Libraries\Project Library\Tests.z:AdHocBankPaymentEvent_TC001"/>
+				<Tab TabKind="Test" Name="Libraries\Project Library\Tests.z:CreateBankAccountTransferforSettlement_TC002"/>
+				<Tab TabKind="Step" Name="Libraries\Project Library\Steps.z:FileAttachment"/>
+				<Tab TabKind="Test" Name="Libraries\Project Library\Tests.z:AdHocBankTransactionEvent_TC003" Selected="true"/>
+			</TabList>
+			<Workspace>
+				<Panels>
+					<Panel Name="Actions Explorer" Size="0" Collapsed="false" LastLocation="DockRight"/>
+					<Panel Name="Compile Errors" Size="0" Collapsed="false" LastLocation="DockBottom"/>
+					<Panel Name="App Objects" Size="0" Collapsed="true" LastLocation="DockRight"/>
+					<Panel Name="App Object Editor" Size="0" Collapsed="false" LastLocation="DockBottom"/>
+					<Panel Name="App Metadata Editor" Size="0" Collapsed="true" LastLocation="DockBottom"/>
+				</Panels>
+				<Sections>
+					<Section Location="DockLeft" Size="247" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockRight" Size="297" Collapsed="false">
+						<Panels>
+							<Panel Name="Actions Explorer"/>
+						</Panels>
+					</Section>
+					<Section Location="DockBottom" Size="49" Collapsed="false">
+						<Panels>
+							<Panel Name="Compile Errors"/>
+						</Panels>
+					</Section>
+				</Sections>
+			</Workspace>
+		</Group>
+		<Group Name="Data Tables" GroupOrientation="Vert" SecondaryGroup="">
+			<Workspace>
+				<Panels>
+					<Panel Name="Actions Explorer" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="Compile Errors" Size="0" Collapsed="false" LastLocation="DockBottom"/>
+					<Panel Name="App Objects" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="App Object Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+					<Panel Name="App Metadata Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+				</Panels>
+				<Sections>
+					<Section Location="DockLeft" Size="247" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockRight" Size="240" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockBottom" Size="156" Collapsed="false">
+						<Panels>
+							<Panel Name="Compile Errors"/>
+						</Panels>
+					</Section>
+				</Sections>
+			</Workspace>
+		</Group>
+		<Group Name="Plans" GroupOrientation="Vert" SecondaryGroup="">
+			<TabList>
+				<Tab TabKind="Plan" Name="CashManagement" Selected="true"/>
+			</TabList>
+			<Workspace>
+				<Panels>
+					<Panel Name="Actions Explorer" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="Compile Errors" Size="0" Collapsed="false" LastDockLocation="DockBottom"/>
+					<Panel Name="App Objects" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="App Object Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+					<Panel Name="App Metadata Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+				</Panels>
+				<Sections>
+					<Section Location="DockLeft" Size="247" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockRight" Size="240" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockBottom" Size="156" Collapsed="true">
+						<Panels>
+							<Panel Name="Compile Errors"/>
+						</Panels>
+					</Section>
+				</Sections>
+			</Workspace>
+		</Group>
+		<Group Name="Test Sets" GroupOrientation="Vert" SecondaryGroup="">
+			<Workspace>
+				<Panels>
+					<Panel Name="Actions Explorer" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="Compile Errors" Size="0" Collapsed="false" LastDockLocation="DockLeft"/>
+					<Panel Name="App Objects" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="App Object Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+					<Panel Name="App Metadata Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+				</Panels>
+				<Sections>
+					<Section Location="DockLeft" Size="247" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockRight" Size="240" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockBottom" Size="156" Collapsed="true">
+						<Panels>
+							<Panel Name="Compile Errors"/>
+						</Panels>
+					</Section>
+				</Sections>
+			</Workspace>
+		</Group>
+		<Group Name="Library" GroupOrientation="Vert" SecondaryGroup="">
+			<TabList>
+				<Tab TabKind="Zee" Name="Libraries\Project Library\GlobalVariables.z" Selected="true"/>
+			</TabList>
+			<Workspace>
+				<Panels>
+					<Panel Name="Actions Explorer" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="Compile Errors" Size="0" Collapsed="false" LastLocation="DockBottom"/>
+					<Panel Name="App Objects" Size="0" Collapsed="true" LastDockLocation="DockRight"/>
+					<Panel Name="App Object Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+					<Panel Name="App Metadata Editor" Size="0" Collapsed="true" LastDockLocation="DockBottom"/>
+				</Panels>
+				<Sections>
+					<Section Location="DockLeft" Size="247" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockRight" Size="240" Collapsed="false">
+						<Panels/>
+					</Section>
+					<Section Location="DockBottom" Size="124" Collapsed="false">
+						<Panels>
+							<Panel Name="Compile Errors"/>
+						</Panels>
+					</Section>
+				</Sections>
+			</Workspace>
+		</Group>
+	</GroupList>
+	<AppObjects Path="Libraries\Project Library\AppObjects_AdHocPaymentPage.z" IsOpen="true"/>
+	<Explorer>
+		<Project IsCollapsed="true"/>
+		<AppView IsCollapsed="true"/>
+		<StepView CollapsedItems="Common,Login,Proxy,Search,TestSpecific" Organize="Group"/>
+		<Types IsCollapsed="true"/>
+		<OtherFiles IsCollapsed="true"/>
+	</Explorer>
+</State>

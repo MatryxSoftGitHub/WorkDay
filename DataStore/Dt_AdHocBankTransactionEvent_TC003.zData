@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore>
+	<Types CRC="8F97586A">
+		<RestrictedString Name="Rbtn_TransactionType">
+			<Values>
+				<Value>Deposit</Value>
+				<Value>Withdrawal</Value>
+			</Values>
+		</RestrictedString>
+		<Record Name="Record_AdHocBankTransactionEvent_TC003">
+			<Field Name="TestcaseID" Type="String" Unique="true"/>
+			<Field Name="sInputStartProxy" Type="String"/>
+			<Field Name="sSearchEvent" Type="String"/>
+			<Field Name="sMemo" Type="String"/>
+			<Field Name="sCompany" Type="String"/>
+			<Field Name="sBankAcc" Type="String"/>
+			<Field Name="sCurrency" Type="String"/>
+			<Field Name="sTransactionType" Type="Rbtn_TransactionType"/>
+			<Field Name="sAmount" Type="String"/>
+			<Field Name="sReferenceName" Type="String"/>
+			<Field Name="sJournalSource" Type="String"/>
+			<Field Name="sRevenue" Type="String"/>
+			<Field Name="sLinesMemo" Type="String"/>
+			<Field Name="sLineCostCenter" Type="String"/>
+		</Record>
+		<List Name="Record_AdHocBankTransactionEventList_TC003" ItemType="Record_AdHocBankTransactionEvent_TC003"/>
+	</Types>
+	<Objects>
+		<Object Name="Dt_AdHocBankTransactionEvent_TC003" Type="Record_AdHocBankTransactionEventList_TC003" Group="CashManagement">
+			<Record_AdHocBankTransactionEvent_TC003>
+				<TestcaseID>AdHocBankTransactionEvent_TC003</TestcaseID>
+				<sInputStartProxy>Albert Wong</sInputStartProxy>
+				<sSearchEvent>Create Ad Hoc Bank Transaction</sSearchEvent>
+				<sMemo>Test Ad Hoc Transaction 1</sMemo>
+				<sCompany>NYT USD  - New York Home Office</sCompany>
+				<sBankAcc>NYT Controlled Disbursement Operating - JPMC USD - 1183</sBankAcc>
+				<sCurrency>USD</sCurrency>
+				<sTransactionType>Withdrawal</sTransactionType>
+				<sAmount>45</sAmount>
+				<sReferenceName>KS-ABT001</sReferenceName>
+				<sJournalSource>Ad Hoc Bank Transaction</sJournalSource>
+				<sRevenue>Cash Conversion (1/1/2020)</sRevenue>
+				<sLinesMemo>Test Ad Hoc Transaction KS 1</sLinesMemo>
+				<sLineCostCenter>100-050 Corporate Accounting (Default)</sLineCostCenter>
+			</Record_AdHocBankTransactionEvent_TC003>
+			<Record_AdHocBankTransactionEvent_TC003>
+				<TestcaseID>AdHocBankTransactionEvent_TC004</TestcaseID>
+				<sInputStartProxy>Albert Wong</sInputStartProxy>
+				<sSearchEvent>Create Ad Hoc Bank Transaction</sSearchEvent>
+				<sMemo>Test Ad Hoc Transaction 1</sMemo>
+				<sCompany>NYT USD  - New York Home Office</sCompany>
+				<sBankAcc>NYT Controlled Disbursement Operating - JPMC USD - 1183</sBankAcc>
+				<sCurrency>USD</sCurrency>
+				<sTransactionType>Withdrawal</sTransactionType>
+				<sAmount>45</sAmount>
+				<sReferenceName>KS-ABT001</sReferenceName>
+				<sJournalSource>Ad Hoc Bank Transaction</sJournalSource>
+				<sRevenue>Cash Conversion (1/1/2020)</sRevenue>
+				<sLinesMemo>Test Ad Hoc Transaction KS 1</sLinesMemo>
+				<sLineCostCenter>100-050 Corporate Accounting (Default)</sLineCostCenter>
+			</Record_AdHocBankTransactionEvent_TC003>
+		</Object>
+	</Objects>
+	<Layout>
+		<Object Name="Dt_AdHocBankTransactionEvent_TC003">
+			<Field Name="TestcaseID" Width="203"/>
+			<Field Name="sInputStartProxy"/>
+			<Field Name="sSearchEvent"/>
+			<Field Name="sMemo"/>
+			<Field Name="sCompany" Width="224"/>
+			<Field Name="sBankAcc"/>
+			<Field Name="sCurrency"/>
+			<Field Name="sTransactionType"/>
+			<Field Name="sAmount"/>
+			<Field Name="sReferenceName"/>
+			<Field Name="sJournalSource"/>
+			<Field Name="sRevenue"/>
+			<Field Name="sLinesMemo"/>
+			<Field Name="sLineCostCenter"/>
+		</Object>
+	</Layout>
+</DataStore>

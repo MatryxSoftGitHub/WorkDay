@@ -1,0 +1,394 @@
+﻿class SearchBeforeStartProxy : Step
+	%StepInfo[Desc="To search the item before Start Proxy.",Group="Search"]
+	parameter String sInputStartProxy
+	out parameter Boolean bActAsPage
+	Main()
+		//Author : Chandana
+		// Search for a Start Proxy and Click on Enter
+		
+		sInputStartProxy=sStartProxy
+		bActAsPage= false
+		BeforeStartProxySearch.SetActive ()
+		BeforeStartProxySearch.Txt_SearchAnItem.TypeKeys (sInputStartProxy)
+		step ClickEnter
+		SearchResultsWorkday.WaitUntilExists (Delay_ExplicitLongWait)
+		SearchResultsWorkday.Txt_StartProxy.Click ()
+		if(StartProxyWorkday.WaitUntilExists(Delay_ExplicitLongWait))
+			bActAsPage=true
+		
+class SearchAfterStartProxy : Step
+	%StepInfo[Desc="To search the item after Start Proxy.",Group="Search"]
+	parameter String sSearchEvent
+	out parameter Boolean bEventPage
+	Main()
+		//Author : Chandana
+		//Search for an Event and Click on Enter
+		
+		 bEventPage=false
+		sEventName = sSearchEvent
+		AfterStartProxySearch.SetActive ()
+		AfterStartProxySearch.Txt_SearchAnItem.TypeKeys (sEventName)
+		step ClickEnter
+		AfterStartProxySearch.WaitWhileExists(Delay_ExplicitShortWait)
+		SearchResults.Lst_SearchResults.Txt_ResultName.Click ()
+		if( EventPage.WaitUntilExists(Delay_ExplicitShortWait))
+			bEventPage=true
+		
+class CreateBankAccountTransferforSettlement_OnFinish : Step
+	%StepInfo[Group="TestSpecific / CashManagement/CreateBankAccountTransferforSettlement"]
+	parameter String sStopProxy
+	Main()
+		if CreateBankAccountTransferFor.Dlg_ErrorInfo.IsPresent () == true
+			CreateBankAccountTransferFor.Dlg_ErrorInfo.Btn_CloseDlg.Click ()
+		step ToHandleDiscardDlg
+		Web.CloseAll ()
+		
+class SearchStopProxy : Step
+	%StepInfo[Desc="To search the item Stop Proxy.",Group="Search"]
+	out parameter Boolean bStopProxyPage
+	Main()
+		//Author : Chandana
+		// Search for a Stop Proxy and Click on Enter
+		
+		 bStopProxyPage=false
+		SearchResults.SetActive ()
+		SearchResults.Lst_SearchResults.Txt_StopProxy.Click ()
+		if StopProxyWorkday.WaitUntilExists (Delay_ExplicitLongWait)
+			bStopProxyPage=true
+		
+class Create_BankTransaction : Step
+	%StepInfo[Desc="Enter transaction information and details",Group="TestSpecific / CashManagement / AdHocBankTransaction"]
+	parameter String sMemo
+	parameter String sCompany
+	parameter String sBankAcc
+	parameter String sCurrency
+	parameter Rbtn_TransactionType sTransactionType
+	parameter String sAmount
+	parameter String sReferenceName
+	parameter String sJournalSource
+	parameter String sRevenue
+	parameter String sLinesMemo
+	parameter String sLineCostCenter
+	out parameter Boolean bVerify
+	Main()
+		bVerify = false
+		CreateAdHocBankTransaction.SetActive ()
+		CreateAdHocBankTransaction.List_BankTransaction_Info.Txt_Memo.SetValue (sMemo)
+		CreateAdHocBankTransaction.List_BankTransaction_Info.Txt_Company.SetValue (sCompany)
+		step ClickEnter ClickEnter_Company
+		CreateAdHocBankTransaction.List_BankTransaction_Info.Txt_BankAccount.SetValue (sBankAcc)
+		step ClickEnter ClickEnter_BankAcc
+		CreateAdHocBankTransaction.List_BankTransaction_Info.Txt_Currency.SetValue (sCurrency)
+		step ClickEnter ClickEnter_Currency
+		CreateAdHocBankTransaction.List_BankTransaction_Info.GenKeyEvents ("<PageDown>")
+		Sleep(Delay_ExplicitShortWait)
+		CreateAdHocBankTransaction.List_BankTransaction_Info.Rbtn_TransactionType.SetValue (sTransactionType)
+		CreateAdHocBankTransaction.List_BankTransaction_Details.Txt_TransactionAmount.SetValue (sAmount)
+		CreateAdHocBankTransaction.List_BankTransaction_Details.Txt_Reference.SetValue (sReferenceName)
+		CreateAdHocBankTransaction.List_BankTransaction_Details.Txt_JournalSource.SetValue (sJournalSource)
+		step ClickEnter ClickEnter_Journal
+		//Scroll page down to view transaction lines tab
+		CreateAdHocBankTransaction.List_BankTransaction_Info.GenKeyEvents ("<PageDown:Repeat 2>", 0.1)
+		step TransactionLines
+			sRevenueSpend:sRevenue
+			sAmount:sAmount
+			sMemo:sLinesMemo
+			sCostCenter:sLineCostCenter
+		if TransactionLines.sActualAmt.Contains (sAmount)
+			bVerify = true
+		
+		
+class TransactionLines : Step
+	%StepInfo[Desc="Enter the details in the transaction lines tab.",Group="TestSpecific / CashManagement / AdHocBankTransaction"]
+	parameter String sRevenueSpend
+	parameter String sAmount
+	parameter String sMemo
+	parameter String sCostCenter
+	out parameter String sActualAmt
+	Main()
+		CreateAdHocBankTransaction.SetActive ()
+		CreateAdHocBankTransaction.LinesTab.Tbl_LinesTab.Row[1].Txt_RevenueSpendCategory.SetValue (sRevenueSpend)
+		step ClickEnter ClickEnter_Revenue
+		CreateAdHocBankTransaction.LinesTab.Tbl_LinesTab.Row[1].Txt_Amt.SetValue (sAmount)
+		step ClickEnter ClickEnter_Amt
+		CreateAdHocBankTransaction.LinesTab.Tbl_LinesTab.Row[1].Txt_Memo.SetValue (sMemo)
+		UA.GenKeyEvents ("<PageDown>")
+		Sleep (Delay_ExplicitShortWait)
+		CreateAdHocBankTransaction.LinesTab.Tbl_LinesTab.Row[1].Txt_CostCenter.SetValue (sCostCenter)
+		step ClickEnter ClickEnter_CostCenter
+		sActualAmt = CreateAdHocBankTransaction.LinesTab.Tbl_LinesTab.Row[1].Txt_Amt.GetText ()
+		
+		
+class AdHocBankTransaction_OnFinish : Step
+	%StepInfo[Desc="Close all the dialog boxes and stop the proxy.",Group="TestSpecific / CashManagement / AdHocBankTransaction"]
+	Main()
+		if( CreateAdHocBankTransaction.IsPresent())
+			CreateAdHocBankTransaction.Txt_Search.GenKeyEvents ("<Ctrl-A>")
+			CreateAdHocBankTransaction.Txt_Search.GenKeyEvents ("<Delete>")
+			CreateAdHocBankTransaction.Txt_Search.SetValue (sStopProxy)
+			step ClickEnter
+			CreateAdHocBankTransaction.DiscardDlg.WaitUntilExists (Delay_ExplicitLongWait, NotExistAction.None)
+			CreateAdHocBankTransaction.DiscardDlg.Btn_Discard.Click ()
+		if( AfterStartProxySearch.IsPresent())
+			AfterStartProxySearch.Txt_SearchAnItem.SetValue (sStopProxy)
+			step ClickEnter
+		SearchResults.WaitUntilExists (Delay_ExplicitLongWait, NotExistAction.None)
+		if(SearchResults.IsPresent())
+			step SearchStopProxy
+			if(SearchStopProxy.bStopProxyPage==false)
+				throw Exception ("Failed to navigate to Stop Proxy page.")
+			step StopProxy
+		if( BeforeStartProxySearch.IsPresent())
+			BeforeStartProxySearch.Close()
+		if( SearchResultsWorkday.IsPresent())
+			SearchResultsWorkday.Close()
+		if( StartProxyWorkday.IsPresent())
+			StartProxyWorkday.Close()
+		
+		
+class CreateBankAccountTransferforSettlement : Step
+	%StepInfo[Desc="Enter 'Transfer Payment Detail' and 'To Account' details.",Group="TestSpecific/CashManagement/CreateBankAccountTransferforSettlement"]
+	parameter String sCurrency
+	parameter String sAmount
+	parameter String sPaymentType
+	parameter String sInitiatingCompany
+	parameter String sInitiatingAccount
+	parameter String sEliminateForeignExchangeGainOr
+	parameter String sMemo
+	parameter String sAccount
+	Main()
+		CreateBankAccountTransferFor.SetActive ()
+		CreateBankAccountTransferFor.Txt_Currency.TypeKeys (sCurrency)
+		Sleep(Delay_ExplicitShortWait)
+		UA.GenKeyEvents ("<Enter>")
+		Sleep (Delay_ExplicitShortWait)
+		CreateBankAccountTransferFor.Txt_Amount.SetValue (sAmount)
+		step ClickEnter ClickEnter_Txt_Amount
+		Sleep (Delay_ExplicitShortWait)
+		// Sleep(Delay_ExplicitShortWait)
+		CreateBankAccountTransferFor.Txt_PaymentType.SetValue (sPaymentType)
+		step ClickEnter ClickEnter_Txt_PaymentType
+		Sleep (Delay_ExplicitShortWait)
+		CreateBankAccountTransferFor.Txt_InitiatingCompany.SetValue (sInitiatingCompany)
+		step ClickEnter ClickEnter_Txt_InitiatingCompany
+		Sleep (Delay_ExplicitShortWait)
+		CreateBankAccountTransferFor.Txt_InitiatingAccount.TypeKeys (sInitiatingAccount)
+		step ClickEnter ClickEnter1
+		Sleep (Delay_ExplicitShortWait)
+		UA.GenKeyEvents ("<PageDown>", 2)
+		
+		if sEliminateForeignExchangeGainOr=="Yes"
+			Print("Enter")
+			Sleep (Delay_ExplicitShortWait)
+			CreateBankAccountTransferFor.Chk_EliminateForeignExchangeGainOr.SetFocus ()
+			Sleep (Delay_ExplicitShortWait)
+			CreateBankAccountTransferFor.Chk_EliminateForeignExchangeGainOr.Click ()
+			
+		CreateBankAccountTransferFor.Txt_Memo.TypeKeys (sMemo)
+		step ClickEnter ClickEnter_Txt_Memo
+		Sleep (Delay_ExplicitShortWait)
+		CreateBankAccountTransferFor.Txt_Account.TypeKeys (sAccount)
+		step ClickEnter ClickEnter_Txt_Account
+		Sleep (Delay_ExplicitShortWait)
+		
+class FileAttachment : Step
+	%StepInfo[Desc="To upload the file.",Group="TestSpecific / CashManagement/CreateBankAccountTransferforSettlement"]
+	out parameter Boolean bPresent
+	parameter String sFileName
+	Main()
+		CreateBankAccountTransferFor.SetActive ()
+		bPresent=false
+		CreateBankAccountTransferFor.Btn_SelectFiles.SetFocus()
+		CreateBankAccountTransferFor.Btn_SelectFiles.Click ()
+		Sleep(Delay_ExplicitShortWait)
+		UA.GenKeyEvents ("C:\AutoToolkit\"+"{sFileName}", 0.1)
+		UA.GenKeyEvents ("<Enter>")
+		if CreateBankAccountTransferFor.Img_SucessImage.WaitUntilExists (Delay_ExplicitLongWait)
+			 bPresent=true
+		
+class EnterStopProxyInEventPage : Step
+	%StepInfo[Desc="Enter the Stop Proxy in the Event Page.",Group="TestSpecific/CashManagement/CreateBankAccountTransferforSettlement"]
+	out parameter Boolean bStopProxyEvent
+	Main()
+		bStopProxyEvent=false
+		CreateBankAccountTransferFor.Txt_SearchField.GenKeyEvents ("<Ctrl-A>")
+		CreateBankAccountTransferFor.Txt_SearchField.GenKeyEvents ("<Delete>")
+		CreateBankAccountTransferFor.Txt_SearchField.TypeKeys (sStopProxy)
+		step ClickEnter
+		if(StopProxyWorkday.IsPresent()==true || SearchResults.IsPresent() )
+			bStopProxyEvent=true
+		
+class ToHandleDiscardDlg : Step
+	%StepInfo[Desc="To Handle Discard Dailogue Box in Event Page.",Group="TestSpecific/CashManagement/CreateBankAccountTransferforSettlement"]
+	Main()
+			Sleep (Delay_ExplicitShortWait)
+		if( CreateBankAccountTransferFor.Dlg_Discard.IsPresent()==true)
+			Sleep (Delay_ExplicitShortWait)
+			CreateBankAccountTransferFor.Dlg_Discard.Btn_Discard.Click ()
+			Sleep (Delay_ExplicitLongWait)
+		if(SearchResults.IsPresent()==true)
+			step SearchStopProxy
+			step StopProxy
+			Sleep (Delay_ExplicitLongWait)
+		else
+			if(StopProxyWorkday.IsPresent()==true)
+				step StopProxy
+				Sleep (Delay_ExplicitLongWait)
+		
+class AdHocBankPayment : Step
+	%StepInfo[Desc="Provide Data For Ad Hoc Payment Information And Payment Details.",Group="TestSpecific / CashManagement/AdHocBankPaymentEvent"]
+	parameter String sCompany
+	parameter String sBankAccount
+	parameter String sPayee
+	parameter String sCurrencyName
+	parameter String sPaymentType
+	parameter String sControlTotalAmount
+	parameter String sMemo
+	Main()
+		//Providing the Data For Payment Information And Payment Details.
+		
+		Web_CreateAdHocPaymentPage.WaitUntilExists (Delay_ExplicitLongWait)
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_Company.SetValue (sCompany)
+		step ClickEnter ClickEnter1
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_BankAccount.SetValue (sBankAccount)
+		step ClickEnter ClickEnter2
+		
+		//Verify For Payee Radio Button If It Is Selected
+		if! Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Rbn_Payee.GetAttr ("IsSelected")
+			Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Rbn_Payee.Click ()
+		
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_Payee.SetValue (sPayee)
+		step ClickEnter ClickEnter3
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_CurrencyName.SetValue (sCurrencyName)
+		step ClickEnter ClickEnter4
+		UA.GenKeyEvents ("<Tab>", 1)// Tab For Scrollding.
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_PaymentType.SetValue (sPaymentType)
+		step ClickEnter ClickEnter5
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_ControlTotalAmount.SetValue (sControlTotalAmount)
+		step ClickEnter ClickEnter6
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Txt_Memo.SetValue (sMemo)
+		step ClickEnter ClickEnter7
+		
+class LinesTab : Step
+	%StepInfo[Desc="Provide The Data In Line Tab In Ad Hoc Bank Paymen tEvent.",Group="TestSpecific / CashManagement/AdHocBankPaymentEvent"]
+	parameter String sCompany
+	parameter String sSpendCategory
+	parameter String sQuantity
+	parameter String sUnitCost
+	parameter String sCostCenter
+	Main()
+		//Press 'Page Down' Button In Three Times For Lines Tab And Click Lines Tab.
+		Web_CreateAdHocPaymentPage.SetActive ()
+		UA.GenKeyEvents ("<PgDn:Repeat 3:Delay 0.1>")
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Lines_Tabs.Txt_Lines.Click()
+		
+		// Providing Data For Lines Table.
+		// Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_LinesTable.Lines[1].Company.SetValue (sCompany)
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_LinesTable.Lines[1].SpendCategory.SetValue (sSpendCategory)
+		UA.GenKeyEvents ("<Enter:Repeat 2>", 1)
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_LinesTable.Lines[1].Quantity.SetValue (sQuantity)
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_LinesTable.Lines[1].UnitCost.SetValue (sUnitCost)
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_LinesTable.Lines[1].CostCenter.SetValue (sCostCenter)
+		
+class Attachments : Step
+	%StepInfo[Desc="Attach The File In Ad Hoc Bank Payment Event.",Group="TestSpecific / CashManagement / AdHocBankPaymentEvent"]
+	parameter String sSourceFile
+	out parameter Boolean bFileUpLoaded
+	Main()
+		bFileUpLoaded = false
+		Print("{sUpLoadFile}"+"{sSourceFile}")
+		Web_CreateAdHocPaymentPage.SetActive ()
+		UA.GenKeyEvents ("<PgDn:Repeat 3:Delay 0.1>", 1)
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.Lines_Tabs.Txt_Attachments.Click()
+		
+		if! Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_Attachement.Btn_SelectFiles.WaitUntilExists(Delay_ExplicitShortWait)
+			LogError ("Attachment Tab is not Found.")
+			
+		// //Provide Source File Path And Click Enter For File Upload.
+		Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_Attachement.Btn_SelectFiles.Click()
+		Sleep (Delay_ExplicitLongWait)
+		UA.GenKeyEvents (GetWorkingDirectoryPath ()+"{sUpLoadFile}"+"{sSourceFile}", 0.1)
+		UA.GenKeyEvents("<Enter>")
+		
+		if Web_CreateAdHocPaymentPage.WebBlem_CreateAdHocPayment.WebElem_Attachement.Btn_Upload.WaitUntilExists(Delay_ExplicitShortWait)
+			bFileUpLoaded=true
+		
+class CreateAdHogPayment : Step
+	%StepInfo[Desc="Create Ad Hog Payment",Group="TestSpecific / CashManagement / AdHocBankPaymentEvent"]
+	parameter String sCompany
+	parameter String sBankAccount
+	parameter String sPayee
+	parameter String sCurrencyName
+	parameter String sPaymentType
+	parameter String sControlTotalAmount
+	parameter String sMemo
+	parameter String sCompany_LinesTab
+	parameter String sSpendCategory
+	parameter String sQuantity
+	parameter String sUnitCost
+	parameter String sCostCenter
+	parameter String sSourceFile
+	out parameter Boolean bFileUpLoaded
+	Main()
+		//Provide Data For Ad Hoc Payment Information And Payment Details.
+		step AdHocBankPayment
+			sCompany:sCompany
+			sBankAccount:sBankAccount
+			sPayee:sPayee
+			sCurrencyName:sCurrencyName
+			sPaymentType:sPaymentType
+			sControlTotalAmount:sControlTotalAmount
+			sMemo:sMemo
+		
+		//Provide The Data In Line Tab In Ad Hoc Bank Paymen tEvent.
+		step LinesTab
+			sCompany:sCompany_LinesTab
+			sSpendCategory:sSpendCategory
+			sQuantity:sQuantity
+			sUnitCost:sUnitCost
+			sCostCenter:sCostCenter
+		
+		//Attach The File In Ad Hoc Bank Payment Event.
+		step Attachments
+			sSourceFile:sSourceFile
+		bFileUpLoaded=Attachments.bFileUpLoaded
+		
+class TC_AdHocBankPaymentEvent_OnFinish : Step
+	%StepInfo[Desc="Stop The Proxt In Ad Hog Bank Evevnt Page.",Group="TestSpecific / CashManagement / AdHocBankPaymentEvent"]
+	Main()
+		// Enter Stop Proxy In The Search Field And Click Seatch Icon.
+		Web_CreateAdHocPaymentPage.SetActive ()
+		Web_CreateAdHocPaymentPage.WebBlock_Search.Txt_Search.GenKeyEvents ("<Ctrl-A>"+"<Delete>")
+		Sleep (iDelayFactor+iDelayFactor)
+		Web_CreateAdHocPaymentPage.WebBlock_Search.Txt_Search.TypeKeys((sStopProxy))
+		Web_CreateAdHocPaymentPage.WebBlock_Search.WebElem_SearchIcon.Click()
+		if Web_CreateAdHocPaymentPage.Elem_DisCardDlg.Btn_Discard.IsPresent()
+			Web_CreateAdHocPaymentPage.Elem_DisCardDlg.Btn_Discard.Click()
+		
+		//Stop The Proxy If 'Stop Proxy' Is Pressent.
+		if SearchResults.WaitUntilExists (Delay_ExplicitShortWait)
+			step SearchStopProxy
+			step StopProxy
+		else
+			throw Exception ("Stop Proxy Page Is Not Found.")
+		
+		Web.CloseAll()
+		
+
+// class FetchData_Excel : Step
+	// %StepInfo[Group="Common"]
+	// parameter String sSheetName
+	// parameter String sConditionCloName
+	// parameter String sConditionValue
+	// Main()
+		// Integer iLoop,jLoop
+		// Database database
+		// 
+		// database.Connect ("DSN=Excel Files; Dbq=C:\Users\pradeep.Matryxsoft\Desktop\TestData_AdHocBankPaymentEvent KS.xlsx;ReadOnly=0")
+		// for(iLoop=1; iLoop<=lsColumnNames.Count(); iLoop++)
+			// Print (lsColumnNames[iLoop], sConditionCloName, sConditionValue,sSheetName)
+			// database.Execute ("SELECT ""{lsColumnNames[iLoop]}"" FROM [{sSheetName}$] WHERE ""{sConditionCloName}""='{sConditionValue}'")
+			// for (jLoop = 1; jLoop<=lsColumnNamesVar.Count(); jLoop++)
+				// if lsColumnNamesVar[jLoop].Contains (lsColumnNames[iLoop])
+					// database.Fetch (lsColumnNamesVar[jLoop])
+		// 

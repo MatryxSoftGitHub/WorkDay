@@ -1,0 +1,41 @@
+﻿app WebPage BeforeStartProxySearch
+	path [@Title=="Home - Workday", !contains <Lbl_OnBeHalOf>]
+	WebText Lbl_OnBeHalOf
+		path [@Text like "On behalf of*"]
+	WebTextField Txt_SearchAnItem
+	WebText Txt_StartProxy
+		path [@Text==sStartProxy]
+app WebPage AfterStartProxySearch
+	path [@Title=="Home - Workday", contains <Lbl_OnBeHalOf>]
+	WebText Lbl_OnBeHalOf
+		path [@Text like "On behalf of*"]
+	WebTextField Txt_SearchAnItem
+		path [(@Placeholder=="Search")|| @Type=="search"]
+	WebElem Lst_SearchResults
+		path WebBlock[@ElemClass=="WJIQ"]
+		WebText Txt_ResultName
+			path [@Text==sEventName]
+app WebPage SearchResults
+	path [@Title=="Search Results - Workday", contains <Lbl_OnBeHalOf>]
+	WebTextField Txt_SearchAnItem
+		path [(@Placeholder=="Search")]
+	WebText Lbl_OnBeHalOf
+		path [@Text like "On behalf of*"]
+	WebElem Lst_SearchResults
+		path WebBlock[@ElemClass=="WJIQ"]
+		WebText Txt_ResultName
+			path [@Text==sEventName]
+		WebText Txt_StartProxy
+			path [@Text==sStartProxy]
+		WebText Txt_StopProxy
+			path [@Text==sStopProxy]
+app WebPage SearchResultsWorkday
+	path [@Title=="Search Results - Workday",!contains <Lbl_OnBeHalOf>]
+	WebText Lbl_OnBeHalOf
+		path [@Text like "On behalf of*"]
+	WebText Txt_StartProxy
+		path [@Text=="Start Proxy"]
+app WebPage EventPage
+	path [@Title==+sEventName+" - Workday"]
+	WebText Txt_EventName
+		path [@Text==sEventName]

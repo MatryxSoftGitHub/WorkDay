@@ -1,0 +1,12 @@
+﻿app WebPage StartProxyWorkday
+	path [@Title=="Start Proxy - Workday"]
+	AppObject temp
+		path WebElem [@ElemClass=="WECQ"]
+		AppObject WebBlock
+			path WebPushButton [@ElemId=="fb9e236cd1ee46b89df3d9807094657a"] match clipped
+			WebPushButton OK
+				path [@Text=="OK"]
+	AppObject WebBlock
+		path [@ElemClass=="WGJN", below WebElem[@ElemId=="wd-EditPage-6$61642"]] match hidden ignored clipped
+	WebPushButton OK2
+		path [@Text=="OK"]

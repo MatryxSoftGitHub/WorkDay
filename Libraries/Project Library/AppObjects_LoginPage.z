@@ -1,0 +1,14 @@
+﻿app WebPage Web_WorkdayPage
+	path [@Title=="Workday transre_preview - Sign In to Workday"]
+	WebTextField Txt_UserName
+		path [@ElemClass=="gwt-TextBox GNMRENADM1B"]
+	WebTextField Txt_Password
+		path [@ElemClass=="gwt-PasswordTextBox GNMRENADM1B"]
+	WebPushButton Btn_SignIn
+		path [@Text=="Sign In"]
+	WebText Lbl_ErrorMsg
+		path [@Text like "Invalid user name or password, please try again. Note: You may not be able to change or reset your password from Workday if your*"]
+	WebPushButton Btn_Skip
+		path [@Text=="Skip"]
+	WebText Lbl_RememberDevice
+		path [@Text=="Remember Device?"]

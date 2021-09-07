@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Library>
+	<Files>
+		<File RelPath="AppObjects_AdHocPaymentPage.z"/>
+		<File RelPath="AppObjects_BankAccTransferSettlementEventPage.z"/>
+		<File RelPath="AppObjects_BankTransactionEventPage.z"/>
+		<File RelPath="AppObjects_CommonDialogs.z"/>
+		<File RelPath="AppObjects_HomePage.z"/>
+		<File RelPath="AppObjects_LoginPage.z"/>
+		<File RelPath="AppObjects_ProxyPage.z"/>
+		<File RelPath="AppObjects_SearchResultPage.z"/>
+		<File RelPath="BaseTest.z"/>
+		<File RelPath="Delays.z"/>
+		<File RelPath="Functions.z"/>
+		<File RelPath="GlobalVariables.z"/>
+		<File RelPath="Steps.z"/>
+		<File RelPath="Steps_Common.z"/>
+		<File RelPath="Steps_Proxy.z"/>
+		<File RelPath="Steps_SearchResult.z"/>
+		<File RelPath="Steps_WorkDayHome.z"/>
+		<File RelPath="Steps_WorkDayLogin.z"/>
+		<File RelPath="Tests.z"/>
+	</Files>
+</Library>

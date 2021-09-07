@@ -1,0 +1,4 @@
+﻿app WebPage Web_WorkdayHomePage
+	path [@Title=="Home - Workday"]
+	WebTextField Txt_Search
+		path [@ElemClass=="css-ldfn33-InputElement esz1u7w0"]

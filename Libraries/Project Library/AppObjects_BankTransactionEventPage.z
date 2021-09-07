@@ -1,0 +1,95 @@
+﻿app WebPage CreateAdHocBankTransaction
+	path [@Title=="Create Ad Hoc Bank Transaction - Workday"]
+	%AppRecord [Usage="Get", RecordName="CreateAdHocBankTransactionOut"]
+	%AppRecord [Usage="Set", RecordName="CreateAdHocBankTransactionIn"]
+	WebList List_BankTransaction_Info
+		path [@ElemClass=="WLFG WEGG"][1]
+		%AppValue [Property="Contents"]
+		WebTextField Txt_Date
+			path [@Label=="Date"]
+		WebTextField Txt_Memo
+			path [@Label=="Memo"]
+		WebTextField Txt_Company
+			path [@Label=="Company"]
+		WebTextField Txt_BankAccount
+			path [@Label=="Bank Account"]
+		WebTextField Txt_Currency
+			path [@Label=="Currency"]
+		WebRadioGroup Rbtn_TransactionType
+			path [all]
+			%AppValue [ValueType=Rbtn_TransactionType]
+	WebList List_BankTransaction_Details
+		path [@ElemClass=="WLFG WEGG"][2]
+		%AppValue [Property="Contents"]
+		WebTextField Txt_TransactionAmount
+			path [@Label=="Transaction Amount"]
+		WebTextField Txt_Purpose
+			path [@Label=="Purpose"]
+		WebTextField Txt_Reference
+			path [@Label=="Reference"]
+		WebTextField Txt_ExternalReference
+			path [@Label=="External Reference"]
+		WebTextField Txt_JournalSource
+			path [@Label=="Journal Source"]
+	WebList List_AccountingOptions
+		path [@ElemClass=="WLFG WEGG"][3]
+		WebCheckBox Chk_ExcludeBankAccountWorktag
+			path [@Label=="Exclude Bank Account Worktag on Lines"]
+		WebCheckBox Chk_EliminateForeignExchange
+			path [@Label=="Eliminate Foreign Exchange Gain or Loss"]
+	WebElem LinesTab
+		path WebBlock[@ElemClass=="WN-1 WLY1 WOGG"]
+		WebText Txt_AdHocTransactionLines
+			path [@Text=="Ad Hoc Bank Transaction Lines"][1]
+		WebText Txt_Attachments
+			path [@Text=="Attachments"]
+		WebTable Tbl_LinesTab
+			path WebBlock[@ElemClass=="WIUG"]
+			AppObject Header
+				path [@ElemClass=="WDVG"]
+				WebText Txt_OrderHeader
+					path [@Text=="Order"]
+				WebText Txt_CompanyHeader
+					path [@Text=="Company"]
+				WebText Txt_RevenueSpendCategoryHeader
+					path [@Text=="Revenue/Spend Category"]
+				WebText Txt_LedgerAccountsHeader
+					path [@Text=="Ledger Accounts"]
+				WebText Txt_AmountHeader
+					path [@Text=="Amount"]
+				WebText Txt_TaxHeader
+					path [@Text=="Tax"]
+				WebText Txt_MemoHeader
+					path [@Text=="Memo"]
+				WebText Txt_CostCenterHeader
+					path [@Text=="Cost Center"]
+				WebText Txt_AdditionalWorktagsHeader
+					path [@Text=="Additional Worktags"]
+				WebText Txt_ResultingWorktagsHeader
+					path [@Text=="Resulting Worktags"]
+			class Row : AppObject
+				path Row [@ElemClass like "*" && @RowIndex>=2]
+				WebTextField Txt_Company
+					path WebText[overlapx <Header.Txt_CompanyHeader>]
+				WebTextField Txt_RevenueSpendCategory
+					path [overlapx<Header.Txt_RevenueSpendCategoryHeader>]
+				WebTextField Txt_Amt
+					path [@ElemId like "56$*-input"][1]
+				WebTextField Txt_Memo
+					path [@ElemId like "56$*-input"][4]
+				WebTextField Txt_CostCenter
+					path [overlapx<Header.Txt_CostCenterHeader>]
+				WebTextField Txt_AdditionalWorkTags
+					path [overlapx<Header.Txt_AdditionalWorktagsHeader>]
+	WebText Txt_Error
+		path [@ElemId=="errorWidgetMessageCount"]
+	WebElem DiscardDlg
+		path WebBlock[@ElemClass=="WMT wd-popup WNEW WCEW WMEW"]
+		WebPushButton Btn_Discard
+			path [@Text=="Discard"]
+		WebPushButton Btn_Continue
+			path [@Text=="Continue"]
+	WebTextField Txt_Search
+		path [@ElemClass=="css-ldfn33-InputElement esz1u7w0"]
+		%AppRecord [Usage="Get"]
+		%AppRecord [Usage="Set"]

@@ -1,0 +1,14 @@
+﻿app WebPage StartProxyWorkday
+	path [@Title=="Start Proxy - Workday"]
+	WebTextField Txt_ActAs
+		path [@Label=="Act As"]
+	WebText Txt_ActAsErrorMsg
+		path Item[@Text like "Error:*"]
+	WebPushButton Btn_OK
+		path [@Text=="OK"]
+	WebPushButton Btn_Cancel
+		path [@Text=="Cancel"]
+app WebPage StopProxyWorkday
+	path [@Title=="Stop Proxy - Workday"]
+	WebPushButton Btn_OK
+		path [@Text=="OK"]

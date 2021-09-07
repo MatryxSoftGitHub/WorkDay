@@ -1,0 +1,173 @@
+﻿class AdHocBankTransactionEvent_TC003 : Web_WorkdayPageAppState
+	%TestInfo[Group="CashManagement",Attr="Author='Supritha', Functionality='Creates bank transaction', TestCaseID='TC003', TestcaseName='AdHoc_BankTransactionEvent'",Table="Dt_AdHocBankTransactionEvent_TC003"]
+	parameter String TestcaseID
+	Main()
+		//Objective:
+		// To create Ad Hoc bank transaction event.
+		
+		Record_AdHocBankTransactionEvent_TC003 dt_Record = DataStore.QueryTableRow ("Dt_AdHocBankTransactionEvent_TC003", "TestcaseID", TestcaseID)
+		// Step 1
+		WriteStep ("Login to workday application as implementor.", "User shall be logged into workday application successfully.")
+		step Login
+			sUserName:sWorkDay_UserName
+		VerifyOutput (true, Login.bPresent, sWorkDay_UserName+ "is logged into workday application successfully.", sWorkDay_UserName+ "failed to login to workday application.")
+		
+		//Step2
+		WriteStep ("Search for Start Proxy in the Search bar.", "Start Proxy page shall be displayed.")
+		step SearchBeforeStartProxy
+			sInputStartProxy:sStartProxy
+		VerifyOutput (true, SearchBeforeStartProxy.bActAsPage, "Start Proxy page is displayed.", "Start Proxy page is not displayed..")
+		
+		// Step3
+		WriteStep ("Enter the Proxy name.", "Proxy As shall be entered and proxy shall be started.")
+		step StartProxy
+			sActAs:dt_Record.sInputStartProxy
+		VerifyOutput (true, AfterStartProxySearch.WaitUntilExists (Delay_Window, NotExistAction.None), "Proxy As: "+dt_Record.sInputStartProxy+" is entered and proxy is started.", "Proxy As: "+dt_Record.sInputStartProxy+" is not entered and failed to start the proxy.")
+		
+		// Step4
+		WriteStep ("Search 'Create Ad Hoc Bank Transaction' in the search bar.", "'Create Ad Hoc Bank Transaction' page shall be displayed. ")
+		step SearchAfterStartProxy
+			sSearchEvent:dt_Record.sSearchEvent
+		VerifyOutput (true, SearchAfterStartProxy.bEventPage, "'Create Ad Hoc Bank Transaction' page is displayed. ", "'Create Ad Hoc Bank Transaction' page is not displayed.")
+		
+		// Step5
+		WriteStep ("Enter the Bank Transaction details.", "Bank Transaction details shall be entered.")
+		step Create_BankTransaction
+			sMemo:dt_Record.sMemo
+			sCompany:dt_Record.sCompany
+			sBankAcc:dt_Record.sBankAcc
+			sCurrency:dt_Record.sCurrency
+			sTransactionType:dt_Record.sTransactionType
+			sAmount:dt_Record.sAmount
+			sReferenceName:dt_Record.sReferenceName
+			sJournalSource:dt_Record.sJournalSource
+			sRevenue:dt_Record.sRevenue
+			sLinesMemo:dt_Record.sLinesMemo
+			sLineCostCenter:dt_Record.sLineCostCenter
+		VerifyOutput (true, Create_BankTransaction.bVerify, "Bank Transaction details are entered.", "Bank Transaction details are not entered.")
+		
+		
+	OnFinish()
+		step AdHocBankTransaction_OnFinish
+class CreateBankAccountTransferforSettlement_TC002 : Web_WorkdayPageAppState
+	%TestInfo[Group="CashManagement",Attr="Author='Chandana, Dileep', Functionality='Cash Management', TestCaseID='TC002', TestcaseName='Create Bank Account Transfer for Settlement'",Table="Dt_CreateBankAccountTransferforSettlement_TC002"]
+	Main()
+		//Objective:
+		// To Create Bank Account Transfer for Settlement.
+		
+		Record_CreateBankAccountTransferforSettlement_TC002 record_CreateBankAccountTransferforSettlement_TC002 = DataStore.QueryTableRow ("Dt_CreateBankAccountTransferforSettlement_TC002", "RowId", "Data_Row_1")
+		
+		// Step 1
+		WriteStep ("Login to workday application as implementor. ", "User shall be logged into workday application successfully.")
+		step Login
+			sUserName:sWorkDay_UserName
+		VerifyOutput (true, Login.bPresent, "User is logged into workday application successfully.", "User failed to login to workday application.")
+		
+		// Step 2
+		WriteStep ("Search for Start Proxy in the Search bar.", "Start Proxy page shall be displayed.")
+		step SearchBeforeStartProxy
+			sInputStartProxy:sStartProxy
+		VerifyOutput (true, SearchBeforeStartProxy.bActAsPage, "Start Proxy page is displayed.", "Start Proxy page is not displayed..")
+		
+		// Step 3
+		WriteStep ("Enter the Proxy name.", "Proxy As shall be entered and proxy shall be started.")
+		step StartProxy
+			sActAs:record_CreateBankAccountTransferforSettlement_TC002.sProxyAs
+		AfterStartProxySearch.WaitUntilExists (Delay_ExplicitLongWait, NotExistAction)
+		VerifyOutput (true, AfterStartProxySearch.IsPresent(), "Proxy As: "+record_CreateBankAccountTransferforSettlement_TC002.sProxyAs+" is entered and proxy is started.", "Proxy As: "+record_CreateBankAccountTransferforSettlement_TC002.sProxyAs+" is not entered and failed to start the proxy.")
+		
+		// Step 4
+		WriteStep ("Search 'Create Bank Account Transfer for Settlement' in the search bar.", "'Create Bank Account Transfer for Settlement' shall be displayed.")
+		step SearchAfterStartProxy
+			sSearchEvent:record_CreateBankAccountTransferforSettlement_TC002.sDtEventName
+		VerifyOutput (true, SearchAfterStartProxy.bEventPage, "Event name: "+sEventName+" is entered Sucessfully.", "Failed to enter "+sEventName+" event name.")
+		
+		// Step 5
+		WriteStep ("Enter 'Transfer Payment Detail' and 'To Account' details ", "'Transfer Payment Detail' and 'To Account' details shall be entered.")
+		step CreateBankAccountTransferforSettlement
+			sCurrency:record_CreateBankAccountTransferforSettlement_TC002.sCurrencyName
+			sAmount:record_CreateBankAccountTransferforSettlement_TC002.sAmount
+			sPaymentType:record_CreateBankAccountTransferforSettlement_TC002.sPaymentType
+			sInitiatingCompany:record_CreateBankAccountTransferforSettlement_TC002.sInitiatingCompany
+			sInitiatingAccount:record_CreateBankAccountTransferforSettlement_TC002.sInitiatingAccount
+			
+			
+			sEliminateForeignExchangeGainOr:record_CreateBankAccountTransferforSettlement_TC002.sChkboxEliminateForeignExchangeGainOrLossCheckbox
+			sMemo:record_CreateBankAccountTransferforSettlement_TC002.sMemo
+			sAccount:record_CreateBankAccountTransferforSettlement_TC002.sToAccountName
+		VerifyOutput (true, CreateBankAccountTransferFor.IsPresent()==true, "Sucessfully entered 'Transfer Payment Detail' and 'To Account' details.", "Failed to enter 'Transfer Payment Detail' and 'To Account' details shall be entered.")
+		
+		// Step 6
+		WriteStep ("Upload the attachment file. ", "The file shall be uploaded.")
+		step FileAttachment
+			sFileName:record_CreateBankAccountTransferforSettlement_TC002.sFileName
+		VerifyOutput (true, FileAttachment.bPresent, "File uploaded sucessfully.", "Failed to upload the file.")
+		
+		// Step 7
+		WriteStep ("Enter as 'Stop Proxy'. ", "In Search Results Page 'Stop Proxy' Link shall be displayed and click on 'Stop Proxy' Link.")
+		step EnterStopProxyInEventPage
+		step ToHandleDiscardDlg
+		VerifyOutput (false, EnterStopProxyInEventPage.bStopProxyEvent, "", "Failed to enter 'Stop Proxy' in Event Page.")
+		VerifyOutput (true, BeforeStartProxySearch.IsPresent()==true, "Sucessfully clicked on 'Stop Proxy'.", "Failed to click on 'Stop Proxy'.")
+		
+		//Step 8
+		WriteStep ("Close the Work Day application. ", "Work Day application shall be closed.")
+		Web.CloseAll ()
+		VerifyOutput (false, BeforeStartProxySearch.IsPresent()==true, "Work Day application is closed sucessfully.", "Failed to close Work Day application.")
+		
+	OnFinish()
+		step CreateBankAccountTransferforSettlement_OnFinish
+class AdHocBankPaymentEvent_TC001 : Web_WorkdayPageAppState
+	%TestInfo[Desc="Create Ad Hoc Payment",Group="CashManagement",Attr="Author='Napa Nagarjuna', Functionality='CashManagement', TestCaseID='TC001', TestcaseName='TC_AdHocBankPaymentEvent'",Table="Dt_AdHocBankPaymentEvent_TC001"]
+	parameter String TestcaseID
+	Main()
+		Record_AdHocBankPaymentEvent_TC001 record_AdHocBankPaymentEvent_TC001 = DataStore.QueryTableRow ("Dt_AdHocBankPaymentEvent_TC001", "TestcaseID", TestcaseID)
+		// Record_AdHocBankPaymentEvent_TC001 record_AdHocBankPaymentEvent_TC001 = DataStore.Query ("Dt_AdHocBankPaymentEvent_TC001[1]")
+		
+		//Step 1
+		WriteStep ("Login to workday application.", "User should be logged in.")
+		step Login
+			sUserName:sWorkDay_UserName
+		VerifyOutput (true, Login.bPresent, "{sWorkDay_UserName} is logged in", "Login to client failed")
+		
+		//Step2
+		WriteStep ("Navigate to the 'Start Proxy' page.", "Start Proxy page should be opened.")
+		step SearchBeforeStartProxy
+			sInputStartProxy:sStartProxy
+		VerifyOutput (true, SearchBeforeStartProxy.bActAsPage, "Start Proxy page is opened.", "Failed to opned Start Proxy page.")
+		
+		//Step 3
+		WriteStep ("Event Search page is opene with Act name.", "Event Search page should be opened with Act name.")
+		step StartProxy
+			sActAs:record_AdHocBankPaymentEvent_TC001.sActAs
+		VerifyOutput (true, (AfterStartProxySearch.Lbl_OnBeHalOf.GetText()).Contains(record_AdHocBankPaymentEvent_TC001.sActAs), "Event search page is opened with Act name : {record_AdHocBankPaymentEvent_TC001.sActAs}.", "Failed to opened Event search page with Act name : {record_AdHocBankPaymentEvent_TC001.sActAs}.")
+		
+		//Step 4
+		WriteStep ("Open 'Create Ad Hoc Payment' page.", "Create Ad Hoc Payment page should be opened.")
+		step SearchAfterStartProxy
+			sSearchEvent:record_AdHocBankPaymentEvent_TC001.sSearchEvent
+		VerifyOutput (true, Web_CreateAdHocPay_ErrorDlg.WaitUntilExists (Delay_Window), "Create Ad Hoc Payment page is opened successfully.", "Failed to opened Create Ad Hoc Payment page.")
+		// 
+		//Step 4
+		WriteStep ("Create 'Ad Hoc Payement'.", "'Ad Hoc Payement' should be created.")
+		step CreateAdHogPayment
+			sCompany:record_AdHocBankPaymentEvent_TC001.sCompany
+			sBankAccount:record_AdHocBankPaymentEvent_TC001.sBankAccount
+			sPayee:record_AdHocBankPaymentEvent_TC001.sPayee
+			sCurrencyName:record_AdHocBankPaymentEvent_TC001.sCurrencyName
+			sPaymentType:record_AdHocBankPaymentEvent_TC001.sPaymentType
+			sControlTotalAmount:record_AdHocBankPaymentEvent_TC001.sControlTotalAmount
+			sMemo:record_AdHocBankPaymentEvent_TC001.sMemo
+			sCompany_LinesTab:record_AdHocBankPaymentEvent_TC001.sCompany_LinesTab
+			sSpendCategory:record_AdHocBankPaymentEvent_TC001.sSpendCategory
+			sQuantity:record_AdHocBankPaymentEvent_TC001.sQuantity
+			sUnitCost:record_AdHocBankPaymentEvent_TC001.sUnitCost
+			sCostCenter:record_AdHocBankPaymentEvent_TC001.sCostCenter
+			sSourceFile:record_AdHocBankPaymentEvent_TC001.sSourceFile
+		VerifyOutput (true, CreateAdHogPayment.bFileUpLoaded, "Completed to create Ad Hoc Payement.", "Failed to create Ad Hoc Payement.")
+		
+		
+	OnFinish()
+		step TC_AdHocBankPaymentEvent_OnFinish 
+
+

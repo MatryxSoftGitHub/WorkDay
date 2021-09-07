@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Types CRC="8F97586A"/>
+	<Declare>
+		<Attributes>
+			<Attribute Name="Author" Type="String"/>
+			<Attribute Name="TestcaseName" Type="String"/>
+			<Attribute Name="Functionality" Type="String"/>
+			<Attribute Name="TestCaseID" Type="String"/>
+		</Attributes>
+		<Variables/>
+	</Declare>
+	<Plans>
+		<Plan GUID="32EB89BF407537C09CFC668BD3FE5131">
+			<Name>CashManagement</Name>
+			<Nodes>
+				<Node GUID="4804267B4AD79AA57A3BCBA1CD7E56C5">
+					<Name>AdHocBankPaymentEvent_TC001</Name>
+					<Attributes>
+						<Author>Napa Nagarjuna</Author>
+						<Functionality>CashManagement</Functionality>
+						<TestCaseID>TC001</TestCaseID>
+						<TestcaseName>TC_AdHocBankPaymentEvent</TestcaseName>
+					</Attributes>
+					<Test Name="AdHocBankPaymentEvent_TC001">
+						<Parameters>
+							<Parameter Name="TestcaseID" Type="String"/>
+						</Parameters>
+					</Test>
+					<Data>
+						<TestcaseID>AdHocBankPaymentEvent_TC001</TestcaseID>
+					</Data>
+				</Node>
+				<Node GUID="6C2AE16A4CA9188FE18AEDAF1C3A9F40">
+					<Name>CreateBankAccountTransferforSettlement_TC002</Name>
+					<Attributes>
+						<Author>Chandana, Dileep</Author>
+						<Functionality>Cash Management</Functionality>
+						<TestCaseID>TC002</TestCaseID>
+						<TestcaseName>Create Bank Account Transfer for Settlement</TestcaseName>
+					</Attributes>
+					<Test Name="CreateBankAccountTransferforSettlement_TC002"/>
+				</Node>
+				<Node GUID="EC3AAEA6484F5FF860F4448ACFF84B42">
+					<Name>AdHocBankTransactionEvent_TC003</Name>
+					<Attributes>
+						<Author>Supritha</Author>
+						<Functionality>Creates bank transaction</Functionality>
+						<TestCaseID>TC003</TestCaseID>
+						<TestcaseName>AdHoc_BankTransactionEvent</TestcaseName>
+					</Attributes>
+					<Test Name="AdHocBankTransactionEvent_TC003">
+						<Parameters>
+							<Parameter Name="TestcaseID" Type="String"/>
+						</Parameters>
+					</Test>
+					<Data>
+						<TestcaseID>AdHocBankTransactionEvent_TC003</TestcaseID>
+					</Data>
+				</Node>
+			</Nodes>
+		</Plan>
+	</Plans>
+</Project>

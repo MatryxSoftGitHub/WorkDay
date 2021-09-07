@@ -1,0 +1,25 @@
+﻿class StartProxy : Step
+	%StepInfo[Desc="Enter Act As and start the proxy.",Group="Proxy"]
+	parameter String sActAs
+	Main()
+		//Author: Supritha
+		// Enter Act As and click on 'OK' button.
+		StartProxyWorkday.SetActive ()
+		StartProxyWorkday.Txt_ActAs.SetValue (sActAs)
+		step ClickEnter
+		StartProxyWorkday.WaitWhileExists (Delay_ExplicitShortWait)
+		StartProxyWorkday.Btn_OK.Click ()
+		StartProxyWorkday.WaitWhileExists (Delay_ExplicitShortWait)
+		if StartProxyWorkday.Txt_ActAsErrorMsg.IsPresent ()
+			throw Exception ("Enter valid Act As value. ")
+		
+class StopProxy : Step
+	%StepInfo[Desc="Click OK to stop the current proxy session.",Group="Proxy"]
+	Main()
+		//Author: Supritha
+		//Click OK to stop the proxy. 
+		StopProxyWorkday.SetActive ()
+		StopProxyWorkday.Btn_OK.Click ()
+		if !(BeforeStartProxySearch.WaitUntilExists (Delay_Window, NotExistAction.None))
+			throw Exception ("Failed to stop the current proxy session.")
+		

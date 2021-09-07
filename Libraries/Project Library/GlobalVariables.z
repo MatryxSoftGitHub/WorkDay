@@ -1,0 +1,12 @@
+﻿String sWorkDay_UserName= "lkumar"
+String sEventName
+String sStartProxy="Start Proxy"
+String sStopProxy="Stop Proxy"
+String sUpLoadFile="\Other\Attachment\"
+String sWorkingDirectory
+
+
+// List<String> lsColumnNames={"Company","SpendCategory","Quantity","UnitCost","CostCenter"}
+// List<String> lsColumnNamesVar={"sCompany","sSpendCategory","sQuantity","sUnitCost","sCostCenter"}
+// String sCompany =lsColumnNames[1], sSpendCategory =lsColumnNames[2], sQuantity =lsColumnNames[3] ,sUnitCost =lsColumnNames[4], sCostCenter=lsColumnNames[5]
+// 

@@ -1,0 +1,23 @@
+﻿class Login : Step
+	%StepInfo[Desc="Login To WorkDay Web Application",Group="Login"]
+	parameter String sUserName
+	out parameter Boolean bPresent
+	Main()
+		//Author : Nagarjuna
+		
+		// Login To WorkDay Web Application 
+		bPresent=false
+		Web_WorkdayPage.SetActive ()
+		Web_WorkdayPage.Txt_UserName.SetValue (sUserName)
+		Web_WorkdayPage.Txt_Password.SetPassword ("WorkDay_Password")
+		Web_WorkdayPage.Btn_SignIn.Click ()
+		
+		// Verification For Error Msg.
+		Web_WorkdayPage.WaitWhileExists (Delay_ExplicitShortWait)
+		if Web_WorkdayPage.Lbl_ErrorMsg.IsPresent ()==true
+			throw Exception ("Invalid User Name Or Password.")
+		Web_WorkdayPage.Btn_Skip.Click ()
+		
+		bPresent = BeforeStartProxySearch.WaitUntilExists (Delay_Window)
+		
+

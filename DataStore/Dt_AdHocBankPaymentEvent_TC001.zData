@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore>
+	<Types CRC="8F97586A">
+		<Record Name="Record_AdHocBankPaymentEvent_TC001">
+			<Field Name="TestcaseID" Type="String" Unique="true"/>
+			<Field Name="sActAs" Type="String"/>
+			<Field Name="sSearchEvent" Type="String"/>
+			<Field Name="sCompany" Type="String"/>
+			<Field Name="sBankAccount" Type="String"/>
+			<Field Name="sPayee" Type="String"/>
+			<Field Name="sCurrencyName" Type="String"/>
+			<Field Name="sPaymentType" Type="String"/>
+			<Field Name="sControlTotalAmount" Type="String"/>
+			<Field Name="sMemo" Type="String"/>
+			<Field Name="sCompany_LinesTab" Type="String"/>
+			<Field Name="sSpendCategory" Type="String"/>
+			<Field Name="sQuantity" Type="String"/>
+			<Field Name="sUnitCost" Type="String"/>
+			<Field Name="sCostCenter" Type="String"/>
+			<Field Name="sSourceFile" Type="String"/>
+		</Record>
+		<List Name="Record_AdHocBankPaymentEvent_TC001List" ItemType="Record_AdHocBankPaymentEvent_TC001"/>
+	</Types>
+	<Objects>
+		<Object Name="Dt_AdHocBankPaymentEvent_TC001" Type="Record_AdHocBankPaymentEvent_TC001List" Group="CashManagement">
+			<Record_AdHocBankPaymentEvent_TC001>
+				<TestcaseID>AdHocBankPaymentEvent_TC001</TestcaseID>
+				<sActAs>Alice Chow</sActAs>
+				<sSearchEvent>Create Ad Hoc Payment</sSearchEvent>
+				<sCompany>NYT USD  - New York Home Office</sCompany>
+				<sBankAccount>NYT Operating - JPMC USD-4785</sBankAccount>
+				<sPayee>AM Best Rating Services, Inc. - 9279</sPayee>
+				<sCurrencyName>USD</sCurrencyName>
+				<sPaymentType>ACH</sPaymentType>
+				<sControlTotalAmount>1000</sControlTotalAmount>
+				<sMemo>TestMemo1</sMemo>
+				<sCompany_LinesTab>NYT USD  - New York Home Office</sCompany_LinesTab>
+				<sSpendCategory>Advertising</sSpendCategory>
+				<sQuantity>1</sQuantity>
+				<sUnitCost>1000</sUnitCost>
+				<sCostCenter>100-000 General Overhead</sCostCenter>
+				<sSourceFile>TestFile.txt</sSourceFile>
+			</Record_AdHocBankPaymentEvent_TC001>
+		</Object>
+	</Objects>
+	<Layout>
+		<Object Name="Dt_AdHocBankPaymentEvent_TC001">
+			<Field Name="TestcaseID" Width="185"/>
+			<Field Name="sActAs"/>
+			<Field Name="sSearchEvent"/>
+			<Field Name="sCompany" Width="187"/>
+			<Field Name="sBankAccount" Width="168"/>
+			<Field Name="sPayee"/>
+			<Field Name="sCurrencyName" Width="184"/>
+			<Field Name="sPaymentType"/>
+			<Field Name="sControlTotalAmount"/>
+			<Field Name="sMemo"/>
+			<Field Name="sCompany_LinesTab"/>
+			<Field Name="sSpendCategory"/>
+			<Field Name="sQuantity"/>
+			<Field Name="sUnitCost"/>
+			<Field Name="sCostCenter"/>
+			<Field Name="sSourceFile"/>
+		</Object>
+	</Layout>
+</DataStore>
