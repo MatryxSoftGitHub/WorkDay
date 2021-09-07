@@ -171,3 +171,8 @@ class AdHocBankPaymentEvent_TC001 : Web_WorkdayPageAppState
 		step TC_AdHocBankPaymentEvent_OnFinish 
 
 
+class SampleTest : Step
+	%StepInfo[Group="Common"]
+	Main()
+		//sample test
+		
