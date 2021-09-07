@@ -169,7 +169,7 @@
 	<Explorer>
 		<Project IsCollapsed="true"/>
 		<AppView IsCollapsed="true"/>
-		<StepView CollapsedItems="Common,Login,Proxy,Search,TestSpecific" Organize="Group"/>
+		<StepView CollapsedItems="Login,Proxy,Search,TestSpecific" Organize="Group"/>
 		<Types IsCollapsed="true"/>
 		<OtherFiles IsCollapsed="true"/>
 	</Explorer>
